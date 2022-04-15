@@ -8,5 +8,17 @@
   "eslint.run": "onSave",
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "spellright.language": ["en"],
-  "spellright.documentTypes": ["markdown"]
+  "spellright.documentTypes": ["markdown"],
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "cal-clone",
+      "database": "cal_clone",
+      "username": "julesfabien"
+    }
+  ]
 }

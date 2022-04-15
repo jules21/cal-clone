@@ -10,13 +10,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Attendee {
+  id      Int     @id @default(autoincrement())
+  email   String
+  name    String?
+  event   Event   @relation(fields: [eventId], references: [id])
+  eventId Int
+
+  @@map(name: "attendees")
+}
+
+model Event {
+  id          Int        @id @default(autoincrement())
+  eventType   EventType  @relation(fields: [eventTypeId], references: [id])
+  eventTypeId Int
+  attendees   Attendee[]
+  description String?
+  eventDate   DateTime
+  createdAt   DateTime   @default(now()) @map(name: "created_at")
+  updatedAt   DateTime   @updatedAt @map(name: "updated_at")
+
+  @@map(name: "events")
+}
+
+model EventType {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String
+  description String
+  length      Int
+  user        User     @relation(fields: [userId], references: [id])
+  userId      Int      @unique
+  events      Event[]
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  @@map(name: "event_types")
+}
+
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password  String?
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id         Int         @id @default(autoincrement())
+  name       String
+  email      String      @unique
+  password   String?
+  eventTypes EventType[]
+  createdAt  DateTime    @default(now()) @map(name: "created_at")
+  updatedAt  DateTime    @updatedAt @map(name: "updated_at")
 
   @@map(name: "users")
 }
