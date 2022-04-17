@@ -1,10 +1,13 @@
-function Button({ children, color, type, isDisabled }) {
+function Button({ props }) {
   return (
     <button
-      type={type}
-      disabled={isDisabled}
-      className={`bg-${color}-500 hover:bg-${color}-700 text-white font-bold py-2 px-4 rounded`}>
-      {children}
+      className={`${
+        props.isDisabled ? "ring-1 text-red-300 ring-red-300 cursor-not-allowed" : "hover:bg-black-200"
+      } w-full font-bold py-2 px-4 mt-4 content-center ${props.customClass}`}
+      type="submit"
+      onClick={props.onClick}
+      disabled={props.isDisabled}>
+      {props.buttonText}
     </button>
   );
 }
