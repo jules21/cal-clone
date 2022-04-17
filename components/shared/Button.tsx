@@ -1,4 +1,9 @@
-function Button({ props }) {
+export interface Props {
+  buttonText: string;
+  customClass?: string;
+  isDisabled?: boolean;
+}
+function Button(props: Props) {
   return (
     <button
       className={`${
