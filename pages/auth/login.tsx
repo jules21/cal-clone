@@ -6,6 +6,8 @@ import { useState } from "react";
 
 import { getSession } from "@helpers/auth";
 
+import Button from "@components/shared/Button";
+
 interface ServerSideProps {
   csrfToken: string;
 }
@@ -61,7 +63,7 @@ export default function Login({ csrfToken }: ServerSideProps) {
                 required
                 value={email}
                 onInput={(e) => setEmail(e.currentTarget.value)}
-                className="block border border-neutral-300 focus:ring-neutral-900"
+                className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
               />
               <input
                 id="password"
@@ -72,12 +74,13 @@ export default function Login({ csrfToken }: ServerSideProps) {
                 required
                 value={password}
                 onInput={(e) => setPassword(e.currentTarget.value)}
-                className="block border border-neutral-300 focus:ring-neutral-900"
+                className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
               />
-
-              <button type="submit" disabled={isSubmitting} className="p-1 text-white bg-blue-800">
-                SIGN IN
-              </button>
+              <Button
+                isDisabled={isSubmitting}
+                buttonText="SIGN IN"
+                customClass="p-1 text-white bg-blue-800"
+              />
             </form>
           </div>
 

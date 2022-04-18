@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import Button from "@components/shared/Button";
+
 export default function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -88,7 +90,7 @@ export default function Signup() {
               required
               value={name}
               onInput={(e) => setName(e.currentTarget.value)}
-              className="block border border-neutral-300 focus:ring-neutral-900"
+              className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
             />
             <input
               id="email"
@@ -98,7 +100,7 @@ export default function Signup() {
               required
               value={email}
               onInput={(e) => setEmail(e.currentTarget.value)}
-              className="block border border-neutral-300 focus:ring-neutral-900"
+              className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
             />
             <input
               id="password"
@@ -109,12 +111,15 @@ export default function Signup() {
               required
               value={password}
               onInput={(e) => setPassword(e.currentTarget.value)}
-              className="block border border-neutral-300 focus:ring-neutral-900"
+              className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
             />
 
-            <button type="submit" disabled={isSubmitting} className="p-1 text-white bg-blue-800">
-              SIGN UP
-            </button>
+            <Button
+              type="submit"
+              isDisabled={isSubmitting}
+              customClass="p-1 text-white bg-blue-800"
+              buttonText="SIGN UP"
+            />
           </form>
           <p className="mt-5 text-sm text-center ">
             Already have an account?
