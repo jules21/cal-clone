@@ -1,4 +1,6 @@
+import axios from "axios";
 import Image from "next/image";
+import Router from "next/router";
 import React from "react";
 
 import Button from "@components/shared/Button";
@@ -6,8 +8,28 @@ import TextInput from "@components/shared/TextInput";
 import Textarea from "@components/shared/Textarea";
 
 function Confirmation() {
-  const handleSubmit = () => {
-    console.log("form submitted");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const date = localStorage.getItem("dateTime");
+      const eventTypeId = localStorage.getItem("eventTypeId");
+      const result = await axios
+        .post("/api/bookings/create", {
+          name: e.target.name.value,
+          email: e.target.email.value,
+          note: e.target.note.value,
+          date,
+          eventTypeId,
+        })
+        .then((res) => {
+          Router.push("/events/success");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <>

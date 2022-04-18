@@ -1,8 +1,15 @@
 import Image from "next/image";
+import Router from "next/router";
+import { useState } from "react";
+
+import Button from "@components/shared/Button";
+import TextInput from "@components/shared/TextInput";
 
 function index() {
-  const handleSubmit = async () => {
-    console.log("form submitted");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    localStorage.setItem("dateTime", e.target.date.value);
+    Router.push("/events/confirmation");
   };
 
   return (
@@ -22,8 +29,10 @@ function index() {
       </div>
       <div className="w-1/2 max-w-lg px-16 py-10 bg-white ">
         <form onSubmit={handleSubmit}>
-          <input id="date" name="date" placeholder="" type="datetime-local" />
-          <div className="flex flex-row content-start"></div>
+          <TextInput id="date" name="date" type="datetime-local" />
+          <div className="flex flex-row content-start">
+            <Button customClass="bg-black text-white" buttonText="Confirm" />
+          </div>
         </form>
       </div>
     </div>
