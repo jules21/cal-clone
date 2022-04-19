@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Router from "next/router";
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 
 import Button from "@components/shared/Button";
-import TextInput from "@components/shared/TextInput";
 
-function index() {
-  const handleSubmit = async (e) => {
+function EventPage() {
+  const [date, setDate] = useState("");
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    localStorage.setItem("dateTime", e.target.date.value);
+    localStorage.setItem("dateTime", date);
     Router.push("/events/confirmation");
   };
 
@@ -29,7 +29,14 @@ function index() {
       </div>
       <div className="w-1/2 max-w-lg px-16 py-10 bg-white ">
         <form onSubmit={handleSubmit}>
-          <TextInput id="date" name="date" type="datetime-local" />
+          <input
+            id="date"
+            name="date"
+            type="datetime-local"
+            value={date}
+            onInput={(e) => setDate(e.currentTarget.value)}
+            className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
+          />
           <div className="flex flex-row content-start">
             <Button customClass="bg-black text-white" buttonText="Confirm" />
           </div>
@@ -39,4 +46,4 @@ function index() {
   );
 }
 
-export default index;
+export default EventPage;

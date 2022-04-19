@@ -4,8 +4,6 @@ import Router from "next/router";
 import React, { useState } from "react";
 
 import Button from "@components/shared/Button";
-import TextInput from "@components/shared/TextInput";
-import Textarea from "@components/shared/Textarea";
 
 function Confirmation() {
   const [name, setName] = useState("");
@@ -17,7 +15,7 @@ function Confirmation() {
     try {
       const date = localStorage.getItem("dateTime");
       const eventTypeId = localStorage.getItem("eventTypeId");
-      const result = await axios
+      await axios
         .post("/api/bookings/create", {
           name,
           email,
@@ -25,7 +23,7 @@ function Confirmation() {
           date,
           eventTypeId,
         })
-        .then((res) => {
+        .then(() => {
           Router.push("/events/success");
         })
         .catch((error) => {
@@ -59,7 +57,7 @@ function Confirmation() {
               placeholder="John Doe"
               type="text"
               className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
-              value={email}
+              value={name}
               onInput={(e) => setName(e.currentTarget.value)}
             />
             <input
@@ -72,11 +70,7 @@ function Confirmation() {
               onInput={(e) => setEmail(e.currentTarget.value)}
             />
             <h3 className="my-4 font-bold">+ Additional Guests</h3>
-            <label
-              htmlFor=""
-              className="block mb-2 text-sm font-bold text-black"
-              value={email}
-              onInput={(e) => setNote(e.currentTarget.value)}>
+            <label htmlFor="" className="block mb-2 text-sm font-bold text-black">
               Additional Notes
             </label>
             <textarea
@@ -84,7 +78,9 @@ function Confirmation() {
               className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
               id="note"
               name="note"
-              placeholder="Please share anything that will help prepare for our meeting"></textarea>
+              placeholder="Please share anything that will help prepare for our meeting"
+              value={note}
+              onInput={(e) => setNote(e.currentTarget.value)}></textarea>
 
             <div className="flex flex-row content-start">
               <Button customClass="bg-black text-white mr-3" buttonText="Confirm" />

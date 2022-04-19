@@ -21,7 +21,7 @@ function EventItem({ booking }: Props) {
       <div className="w-7/12 ml-8">
         <p className="font-bold">{booking.eventType.title}</p>
         <p className="text-gray-400">{booking.description}</p>
-        <p>{booking.userId}</p>
+        <p>{booking.eventType.user.email}</p>
       </div>
       <div className="w-2/12 px-5">
         <Button customClass="text-black border border-black" buttonText="Cancel" />
