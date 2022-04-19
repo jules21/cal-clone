@@ -2,7 +2,7 @@ export interface Props {
   buttonText: string;
   customClass?: string;
   isDisabled?: boolean;
-  buttonType: ButtonTypes;
+  buttonType?: ButtonTypes;
 }
 
 enum ButtonTypes {

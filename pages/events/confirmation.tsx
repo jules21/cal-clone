@@ -1,23 +1,27 @@
 import axios from "axios";
 import Image from "next/image";
 import Router from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "@components/shared/Button";
 import TextInput from "@components/shared/TextInput";
 import Textarea from "@components/shared/Textarea";
 
 function Confirmation() {
-  const handleSubmit = async (e) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [note, setNote] = useState("");
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
       const date = localStorage.getItem("dateTime");
       const eventTypeId = localStorage.getItem("eventTypeId");
       const result = await axios
         .post("/api/bookings/create", {
-          name: e.target.name.value,
-          email: e.target.email.value,
-          note: e.target.note.value,
+          name,
+          email,
+          note,
           date,
           eventTypeId,
         })
@@ -49,17 +53,39 @@ function Confirmation() {
         </div>
         <div className="w-1/2 max-w-lg px-16 py-10 bg-white ">
           <form onSubmit={handleSubmit}>
-            <TextInput id="name" name="name" placeholder="John Doe" type="text" />
-            <TextInput id="email" name="email" placeholder="you@example.com" type="text" />
+            <input
+              id="name"
+              name="name"
+              placeholder="John Doe"
+              type="text"
+              className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
+              value={email}
+              onInput={(e) => setName(e.currentTarget.value)}
+            />
+            <input
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              type="text"
+              className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
+              value={email}
+              onInput={(e) => setEmail(e.currentTarget.value)}
+            />
             <h3 className="my-4 font-bold">+ Additional Guests</h3>
-            <label htmlFor="" className="block mb-2 text-sm font-bold text-black">
+            <label
+              htmlFor=""
+              className="block mb-2 text-sm font-bold text-black"
+              value={email}
+              onInput={(e) => setNote(e.currentTarget.value)}>
               Additional Notes
             </label>
-            <Textarea
+            <textarea
+              rows={4}
+              className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
               id="note"
               name="note"
-              placeholder="Please share anything that will help prepare for our meeting"
-            />
+              placeholder="Please share anything that will help prepare for our meeting"></textarea>
+
             <div className="flex flex-row content-start">
               <Button customClass="bg-black text-white mr-3" buttonText="Confirm" />
               <Button customClass="text-black bg-white border border-black" buttonText="Cancel" />

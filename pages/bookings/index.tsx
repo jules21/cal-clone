@@ -3,7 +3,11 @@ import { server } from "@helpers/config/constants";
 import EventItem from "@components/EventItem";
 import Navbar from "@components/shared/Navbar";
 
-export default function Bookings({ bookings }) {
+export interface Props {
+  bookings: any;
+}
+
+export default function Bookings({ bookings }: Props) {
   return (
     <>
       <div className="h-screen p-20 bg-gray-100 px-9">
@@ -12,7 +16,7 @@ export default function Bookings({ bookings }) {
           See upcoming and past events booked through your event type links
         </p>
         <Navbar />
-        {bookings.map((booking) => (
+        {bookings.map((booking: any) => (
           <EventItem key={booking.id} booking={booking} />
         ))}
       </div>

@@ -114,12 +114,7 @@ export default function Signup() {
               className="w-full px-3 py-2 mb-2 text-gray-700 border appearance-none"
             />
 
-            <Button
-              type="submit"
-              isDisabled={isSubmitting}
-              customClass="p-1 text-white bg-blue-800"
-              buttonText="SIGN UP"
-            />
+            <Button isDisabled={isSubmitting} customClass="p-1 text-white bg-blue-800" buttonText="SIGN UP" />
           </form>
           <p className="mt-5 text-sm text-center ">
             Already have an account?

@@ -3,6 +3,7 @@ export interface Props {
   type: string;
   id: string;
   placeholder?: string;
+  onInput: (event: any) => void;
 }
 function TextInput(props: Props) {
   return (
@@ -11,6 +12,7 @@ function TextInput(props: Props) {
       name={props.name}
       type={props.type}
       id={props.id}
+      onInput={props.onInput}
       placeholder={props.placeholder ?? ""}
     />
   );

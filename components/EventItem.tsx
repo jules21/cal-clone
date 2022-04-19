@@ -4,10 +4,7 @@ import moment from "moment";
 import Button from "@components/shared/Button";
 
 export interface Props {
-  date: string;
-  title: string;
-  description: string;
-  userId: number;
+  booking: any;
 }
 
 function EventItem({ booking }: Props) {
@@ -22,7 +19,7 @@ function EventItem({ booking }: Props) {
         </p>
       </div>
       <div className="w-7/12 ml-8">
-        <p className="font-bold">{booking.title}</p>
+        <p className="font-bold">{booking.eventType.title}</p>
         <p className="text-gray-400">{booking.description}</p>
         <p>{booking.userId}</p>
       </div>
